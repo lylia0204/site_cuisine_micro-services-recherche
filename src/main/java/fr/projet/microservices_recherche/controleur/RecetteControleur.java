@@ -1,5 +1,9 @@
 package fr.projet.microservices_recherche.controleur;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,13 +26,21 @@ public class RecetteControleur {
 	
 	
 
-	private WebClient client = WebClient.create(System.getenv("NODE_API_URL"));
+	//private WebClient client = WebClient.create("http://ec2-15-188-99-8.eu-west-3.compute.amazonaws.com");
+	private WebClient client = WebClient.create(System.getenv("node_api_url"));
 	//private WebClient client = WebClient.create("http://ec2-35-181-9-246.eu-west-3.compute.amazonaws.com:8888");
 	
 	
 
 @GetMapping(path = "/public/recettes")  
-private Flux<Recette> getAllRecettes() { 
+private Flux<Recette> getAllRecettes() throws FileNotFoundException, UnsupportedEncodingException{ 
+	PrintWriter writer = new PrintWriter("/tmp/the-file-name.txt", "UTF-8");
+	writer.println("The first line");
+	writer.println(System.getenv("node_api_url"));
+	writer.println("The third line");
+	writer.println(System.getenv("NODE_API_URL"));
+	writer.println("The third line");
+	writer.close();
 	return client.get()
 			.uri("/recette-api/public/recettes")
 			.accept(MediaType.APPLICATION_JSON)
@@ -38,7 +50,7 @@ private Flux<Recette> getAllRecettes() {
 }
 
 @GetMapping("public/recette/{_id}")
-public Mono<Recette>getEventById(@PathVariable("_id") String _id){
+public Mono<Recette>getEventById(@PathVariable("_id") String _id) {
 	System.out.println(" Connection to Spring BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOT");
 	return client.get().uri("/recette-api/public/recette/{_id}", _id)
 			.accept(MediaType.APPLICATION_JSON)
