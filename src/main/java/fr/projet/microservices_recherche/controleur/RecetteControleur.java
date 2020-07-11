@@ -27,7 +27,7 @@ public class RecetteControleur {
 	
 
 	//private WebClient client = WebClient.create("http://ec2-15-188-99-8.eu-west-3.compute.amazonaws.com");
-	private WebClient client = WebClient.create(System.getenv("node_api_url"));
+	private WebClient client = WebClient.create(System.getenv("NODE_API_URL"));
 	//private WebClient client = WebClient.create("http://ec2-35-181-9-246.eu-west-3.compute.amazonaws.com:8888");
 	
 	
