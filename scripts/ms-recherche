@@ -5,6 +5,7 @@ SERVICE_NAME=ms-recherche
 PATH_TO_JAR=/opt/ms-recherche/microservices_recherche-0.0.1-SNAPSHOT.jar
 #chemin du pid (for killing)
 PID_PATH_NAME=/tmp/ms-recherche-pid
+[ -f /root/.bashrc ] && . /root/.bashrc
 case $1 in
     start)
         echo "Starting $SERVICE_NAME ..."
