@@ -33,14 +33,7 @@ public class RecetteControleur {
 	
 
 @GetMapping(path = "/public/recettes")  
-private Flux<Recette> getAllRecettes() throws FileNotFoundException, UnsupportedEncodingException{ 
-	PrintWriter writer = new PrintWriter("/tmp/the-file-name.txt", "UTF-8");
-	writer.println("The first line");
-	writer.println(System.getenv("node_api_url"));
-	writer.println("The third line");
-	writer.println(System.getenv("NODE_API_URL"));
-	writer.println("The third line");
-	writer.close();
+private Flux<Recette> getAllRecettes() { 
 	return client.get()
 			.uri("/recette-api/public/recettes")
 			.accept(MediaType.APPLICATION_JSON)
