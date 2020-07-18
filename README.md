@@ -36,10 +36,7 @@ Créer un dossier: (Git bash here)
 $ git https://github.com/lylia0204/site_cuisine_micro-services-recherche.git
 $ site_cuisine_micro-services-recherche
 ```
-Avec le jar:
-```sh
-$ java -jar microservices_recherche-0.0.1-SNAPSHOT.jar
-```
+
 Importer le dossier dans votre IDE : 
 
 PORT_EVENT : un port libre  
