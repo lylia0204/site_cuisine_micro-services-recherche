@@ -64,6 +64,14 @@ public Flux<Recette>getRecetteByTypeRecette(@RequestParam(required = false) Stri
 
 
 
+@RequestMapping(value = "public/searchrecette")
+public Flux<Recette> getRecetteByNomRecette(@RequestParam(required = false) String search) {
+	
+	return client.get().uri("/recette-api/public/searchrecette?search=" + search).accept(MediaType.APPLICATION_JSON)
+			.retrieve().bodyToFlux(Recette.class).log("cherche bu name heeeeeeeeeeeeeeeeeey");
+}
+
+
 }
 	
 	
