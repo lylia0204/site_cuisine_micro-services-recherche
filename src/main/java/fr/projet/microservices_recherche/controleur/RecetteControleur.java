@@ -26,9 +26,8 @@ public class RecetteControleur {
 	
 	
 
-	//private WebClient client = WebClient.create("http://ec2-15-188-99-8.eu-west-3.compute.amazonaws.com");
+	
 	private WebClient client = WebClient.create(System.getenv("NODE_API_URL"));
-	//private WebClient client = WebClient.create("http://ec2-35-181-9-246.eu-west-3.compute.amazonaws.com:8888");
 	
 	
 
@@ -71,90 +70,9 @@ public Flux<Recette> getRecetteByNomRecette(@RequestParam(required = false) Stri
 			.retrieve().bodyToFlux(Recette.class).log("cherche bu name heeeeeeeeeeeeeeeeeey");
 }
 
-
 }
 	
 	
-	//private WebClient client; //= WebClient.create("http://localhost:3000");
-	
-	
-//	public EventService(WebClient.Builder webClientBuilder) {
-//		this.client = webClientBuilder.baseUrl("http://localhost:3000").build();
-//	}
-	
-	
-//	@GetMapping(path="public/events")
-//	public Flux<Recette> getEvents(){
-//		return client.get()
-//				.uri("/event-api/public/events")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("heyy$*****");
-//	}
-//	
-//	
-//	
-//	
-//	@PostMapping("private/event")
-//	public Mono<Event>createEvent(@RequestBody Event event){
-//		return client.post().uri("/event-api/private/event")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.body(BodyInserters.fromObject(event))
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("********hey CREATE ************");	
-//	}
-//	
-//	@PutMapping ("private/admin/event")
-//	public Mono<Event> updateEvent(@RequestBody Event event){
-//		return client.put().uri("event-api/private/role-admin/updateEvent")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.syncBody(event)
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("**Hey   UPDATE***********");
-//	}
-//	
-//	@RequestMapping(value = "public/event", params = "country" )
-//	public Flux<Event>getEventByCountry(@RequestParam String country){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/event?country="+country)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********COUUNTTRYY************");	
-//	}
-//	
-//	@RequestMapping(value = "public/event", params = "city" )
-//	public Flux<Event>getEventByCity(@RequestParam String city){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/event?city="+city)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********CCCIIIITTTYYYYY************");	
-//	}
-//	
-//	@RequestMapping(value = "public/event")
-//	public Flux<Event>getEventByKeyWord(@RequestParam String research){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/search?research="+research)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********KEY******WORD************");	
-//	}
-//	
-//	@DeleteMapping("private/admin/event/{_id}")
-//	public Mono<Event> deleteEvent(@PathVariable("_id") String _id){
-//		return client.delete().uri("/event-api/private/role-admin/deleteEvent/{_id}", _id)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("**Hey   DELETE***********" + _id);
-//	}
-//	
 	
 
 
