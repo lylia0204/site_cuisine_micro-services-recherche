@@ -70,8 +70,94 @@ public Flux<Recette> getRecetteByNomRecette(@RequestParam(required = false) Stri
 			.retrieve().bodyToFlux(Recette.class).log("cherche bu name heeeeeeeeeeeeeeeeeey");
 }
 
-}
+
+
+
+
+@RequestMapping(value = "public/searchin")
+public Flux<Recette> getRecetteByIngrRecette(@RequestParam(required = false) String in1, String in2, String in3) {
 	
+	
+	
+	
+	
+	if(in1 == null && in2 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in2 == null && in3 == null) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in1 == null && in3 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in2="+in2).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in1 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in2="+in2+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in2 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in3 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in2="+in2).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in2="+in2+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+			.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+}
+
+@RequestMapping(value = "public/searchas")
+public Flux<Recette> getRecetteAvecSansIngredient(@RequestParam(required = false) String rqt, String avec, String sans) {
+	
+	
+	
+	
+	
+	if(rqt == null && avec == null ) {
+		return client.get().uri("/recette-api/public/searchas?sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(avec == null && sans == null) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(rqt == null && sans == null ) {
+		return client.get().uri("/recette-api/public/searchas?avec="+avec).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(rqt == null ) {
+		return client.get().uri("/recette-api/public/searchas?avec="+avec+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(avec == null ) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(sans == null ) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&avec="+avec).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&avec="+avec+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+			.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+}
+
+
+}
 	
 	
 
