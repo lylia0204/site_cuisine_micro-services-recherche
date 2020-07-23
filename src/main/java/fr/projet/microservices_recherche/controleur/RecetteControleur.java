@@ -72,89 +72,94 @@ public Flux<Recette> getRecetteByNomRecette(@RequestParam(required = false) Stri
 }
 
 
+
+
+@RequestMapping(value = "public/searchin")
+public Flux<Recette> getRecetteByIngrRecette(@RequestParam(required = false) String in1, String in2, String in3) {
+	
+	
+	
+	
+	
+	if(in1 == null && in2 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in2 == null && in3 == null) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in1 == null && in3 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in2="+in2).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in1 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in2="+in2+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in2 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	if(in3 == null ) {
+		return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in2="+in2).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+	}
+	
+	return client.get().uri("/recette-api/public/searchin?in1="+in1+"&in2="+in2+"&in3="+in3).accept(MediaType.APPLICATION_JSON)
+			.retrieve().bodyToFlux(Recette.class).log("in1= " + in1 + "  in2 = "+in2 +"  in3 = "+in3);
+}
+
+@RequestMapping(value = "public/searchas")
+public Flux<Recette> getRecetteAvecSansIngredient(@RequestParam(required = false) String rqt, String avec, String sans) {
+	
+	
+	
+	
+	
+	if(rqt == null && avec == null ) {
+		return client.get().uri("/recette-api/public/searchas?sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(avec == null && sans == null) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(rqt == null && sans == null ) {
+		return client.get().uri("/recette-api/public/searchas?avec="+avec).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(rqt == null ) {
+		return client.get().uri("/recette-api/public/searchas?avec="+avec+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(avec == null ) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	if(sans == null ) {
+		return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&avec="+avec).accept(MediaType.APPLICATION_JSON)
+				.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+	}
+	
+	return client.get().uri("/recette-api/public/searchas?rqt="+rqt+"&avec="+avec+"&sans="+sans).accept(MediaType.APPLICATION_JSON)
+			.retrieve().bodyToFlux(Recette.class).log("rqt= " + rqt + "  avec = "+avec +"  sans = "+sans);
+}
+
+
 }
 	
 	
-	//private WebClient client; //= WebClient.create("http://localhost:3000");
-	
-	
-//	public EventService(WebClient.Builder webClientBuilder) {
-//		this.client = webClientBuilder.baseUrl("http://localhost:3000").build();
-//	}
-	
-	
-//	@GetMapping(path="public/events")
-//	public Flux<Recette> getEvents(){
-//		return client.get()
-//				.uri("/event-api/public/events")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("heyy$*****");
-//	}
-//	
-//	
-//	
-//	
-//	@PostMapping("private/event")
-//	public Mono<Event>createEvent(@RequestBody Event event){
-//		return client.post().uri("/event-api/private/event")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.body(BodyInserters.fromObject(event))
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("********hey CREATE ************");	
-//	}
-//	
-//	@PutMapping ("private/admin/event")
-//	public Mono<Event> updateEvent(@RequestBody Event event){
-//		return client.put().uri("event-api/private/role-admin/updateEvent")
-//				.accept(MediaType.APPLICATION_JSON)
-//				.syncBody(event)
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("**Hey   UPDATE***********");
-//	}
-//	
-//	@RequestMapping(value = "public/event", params = "country" )
-//	public Flux<Event>getEventByCountry(@RequestParam String country){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/event?country="+country)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********COUUNTTRYY************");	
-//	}
-//	
-//	@RequestMapping(value = "public/event", params = "city" )
-//	public Flux<Event>getEventByCity(@RequestParam String city){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/event?city="+city)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********CCCIIIITTTYYYYY************");	
-//	}
-//	
-//	@RequestMapping(value = "public/event")
-//	public Flux<Event>getEventByKeyWord(@RequestParam String research){
-//		System.out.println("DANS COUNTRY !!!!");
-//		return client.get().uri("/event-api/public/search?research="+research)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToFlux(Event.class)
-//				.log("********KEY******WORD************");	
-//	}
-//	
-//	@DeleteMapping("private/admin/event/{_id}")
-//	public Mono<Event> deleteEvent(@PathVariable("_id") String _id){
-//		return client.delete().uri("/event-api/private/role-admin/deleteEvent/{_id}", _id)
-//				.accept(MediaType.APPLICATION_JSON)
-//				.retrieve()
-//				.bodyToMono(Event.class)
-//				.log("**Hey   DELETE***********" + _id);
-//	}
-//	
 	
 
 
